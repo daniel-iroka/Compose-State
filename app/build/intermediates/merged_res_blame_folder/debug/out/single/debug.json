@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/daniel-iroka/AndroidStudioProjects/starter/app/build/intermediates/merged_res/debug/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "/home/daniel-iroka/AndroidStudioProjects/starter/app/src/main/res/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/daniel-iroka/AndroidStudioProjects/starter/app/build/intermediates/merged_res/debug/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/daniel-iroka/AndroidStudioProjects/starter/app/src/main/res/drawable/ic_launcher_background.xml"
+    }
+]

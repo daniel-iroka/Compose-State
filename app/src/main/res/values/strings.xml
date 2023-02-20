@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">iState</string>
+  <string name="register">Register</string>
+  <string name="clear">Clear</string>
+  <string name="username">Enter Username</string>
+  <string name="star_wars">Star Wars</string>
+  <string name="star_trek">Star Trek</string>
+  <string name="email">Enter Email</string>
+</resources>

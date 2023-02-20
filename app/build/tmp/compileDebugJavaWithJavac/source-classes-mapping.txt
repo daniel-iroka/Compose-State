@@ -1,0 +1,2 @@
+com/rodrigoguerrero/istate/BuildConfig.java
+ com.rodrigoguerrero.istate.BuildConfig
