@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rodrigoguerrero.istate.models.User
 
+// This is our 'MainViewModel' for just our User.
+
 class MainViewModel : ViewModel() {
 
     private val _users = MutableLiveData<List<User>>()

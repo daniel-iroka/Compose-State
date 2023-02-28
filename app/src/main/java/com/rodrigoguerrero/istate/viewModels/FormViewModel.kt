@@ -8,6 +8,8 @@ import com.rodrigoguerrero.istate.models.RegistrationFormDataState
 
 const val favoriteAvengerDefault = "Select favorite Avenger"
 
+// This is our 'State handler' or ViewModel which will receive events upwards, modify the State's and then send it back to the Composables.
+
 class FormViewModel : ViewModel() {
 
     private val _formData = MutableLiveData(RegistrationFormDataState())

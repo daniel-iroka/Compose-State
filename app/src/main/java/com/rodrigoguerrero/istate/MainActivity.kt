@@ -5,18 +5,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material.FabPosition
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rodrigoguerrero.istate.models.RegistrationFormDataState
+import com.rodrigoguerrero.istate.models.User
 import com.rodrigoguerrero.istate.ui.composables.FabAddUser
 import com.rodrigoguerrero.istate.ui.composables.RegistrationFormScreen
 import com.rodrigoguerrero.istate.ui.composables.UserList
@@ -30,21 +29,39 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             IStateTheme {
                 val navController = rememberNavController()
+                val users by mainViewModel.users.observeAsState(emptyList())
 
                 NavHost(navController = navController, startDestination = "list") {
                     composable("list") {
-                        UserListScreen(navController)
+
+                        ListTopAppBar()
+
+                        UserListScreen(navController = navController, users = users)
                     }
+
                     composable("form") {
+
+                        FormTopAppBar()
+
+                        // Getting Reference to our FormViewModel and our RegistrationDataFormState.
                         val formViewModel: FormViewModel by viewModels()
                         val registrationFormData by formViewModel.formData.observeAsState(initial = RegistrationFormDataState())
 
                         RegistrationFormScreen(
-                            registrationFormData = registrationFormData,
+                            registrationFormDataState = registrationFormData,
                             onEmailChanged = formViewModel::onEmailChanged,
-                            onUserNameChanged = formViewModel::onUsernameChanged
+                            onUserNameChanged = formViewModel::onUsernameChanged,
+                            onStarWarsSelectedChange = formViewModel::onStarWarsSelectedChanged,
+                            onFavouriteAvengerChanged = formViewModel::onFavoriteAvengerChanged,
+                            onClearClicked = formViewModel::onClearClicked,
+                            onRegisteredClicked = { user ->
+                                formViewModel.onClearClicked()
+                                mainViewModel.addUser(user)
+                                navController.popBackStack()
+                            }
                         )
                     }
                 }
@@ -58,6 +75,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun UserListScreen(
     navController: NavController,
+    users : List<User>
 ) {
     Surface(color = MaterialTheme.colors.background) {
         Scaffold(
@@ -66,7 +84,30 @@ fun UserListScreen(
             },
             floatingActionButtonPosition = FabPosition.End
         ) {
-            UserList()
+            UserList(users)
         }
     }
+}
+
+@Composable
+fun FormTopAppBar() {
+    // Todo - When I come back, I will fix this thing...
+    TopAppBar(
+        title = {
+            Text(text = "Form")
+        },
+        backgroundColor = MaterialTheme.colors.secondary,
+        contentColor = Color.White
+    )
+}
+
+@Composable
+fun ListTopAppBar() {
+    TopAppBar(
+        title = {
+            Text(text = "List")
+        },
+        backgroundColor = MaterialTheme.colors.secondary,
+        contentColor = Color.White
+    )
 }

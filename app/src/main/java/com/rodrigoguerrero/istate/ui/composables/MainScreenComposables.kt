@@ -80,9 +80,10 @@ fun UserList(users: List<User> = emptyList()) {
     }
 }
 
+// Todo - When I come back, I can add some more modifications to this like making the lists look better.
+
 @Composable
 fun ItemUser(user: User) {
-
 
     Column(
         modifier = Modifier
