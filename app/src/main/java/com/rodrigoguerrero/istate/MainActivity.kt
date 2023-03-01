@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,32 +38,36 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navController, startDestination = "list") {
                     composable("list") {
 
-                        ListTopAppBar()
+                        Column {
+                            ListTopAppBar()
 
-                        UserListScreen(navController = navController, users = users)
+                            UserListScreen(navController = navController, users = users)
+                        }
                     }
 
                     composable("form") {
 
-                        FormTopAppBar()
+                        Column {
+                            FormTopAppBar()
 
-                        // Getting Reference to our FormViewModel and our RegistrationDataFormState.
-                        val formViewModel: FormViewModel by viewModels()
-                        val registrationFormData by formViewModel.formData.observeAsState(initial = RegistrationFormDataState())
+                            // Instantiating our FormViewModel and getting reference to our RegistrationDataFormState.
+                            val formViewModel: FormViewModel by viewModels()
+                            val registrationFormData by formViewModel.formData.observeAsState(initial = RegistrationFormDataState())
 
-                        RegistrationFormScreen(
-                            registrationFormDataState = registrationFormData,
-                            onEmailChanged = formViewModel::onEmailChanged,
-                            onUserNameChanged = formViewModel::onUsernameChanged,
-                            onStarWarsSelectedChange = formViewModel::onStarWarsSelectedChanged,
-                            onFavouriteAvengerChanged = formViewModel::onFavoriteAvengerChanged,
-                            onClearClicked = formViewModel::onClearClicked,
-                            onRegisteredClicked = { user ->
-                                formViewModel.onClearClicked()
-                                mainViewModel.addUser(user)
-                                navController.popBackStack()
-                            }
-                        )
+                            RegistrationFormScreen(
+                                registrationFormDataState = registrationFormData,
+                                onEmailChanged = formViewModel::onEmailChanged,
+                                onUserNameChanged = formViewModel::onUsernameChanged,
+                                onStarWarsSelectedChange = formViewModel::onStarWarsSelectedChanged,
+                                onFavouriteAvengerChanged = formViewModel::onFavoriteAvengerChanged,
+                                onClearClicked = formViewModel::onClearClicked,
+                                onRegisteredClicked = { user ->
+                                    formViewModel.onClearClicked()
+                                    mainViewModel.addUser(user)
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
                     }
                 }
             }
@@ -71,7 +76,6 @@ class MainActivity : ComponentActivity() {
 }
 
 // This is the composable that displays or emits everything on the Screen
-
 @Composable
 fun UserListScreen(
     navController: NavController,
@@ -89,9 +93,9 @@ fun UserListScreen(
     }
 }
 
+// Then below are our AppBars or ToolBars.
 @Composable
 fun FormTopAppBar() {
-    // Todo - When I come back, I will fix this thing...
     TopAppBar(
         title = {
             Text(text = "Form")

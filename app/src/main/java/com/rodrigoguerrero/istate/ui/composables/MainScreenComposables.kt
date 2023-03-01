@@ -80,7 +80,7 @@ fun UserList(users: List<User> = emptyList()) {
     }
 }
 
-// Todo - When I come back, I can add some more modifications to this like making the lists look better.
+// Todo - When I come back next time, I will add some more modifications to this like making the lists and the texts look more organized and better.
 
 @Composable
 fun ItemUser(user: User) {
