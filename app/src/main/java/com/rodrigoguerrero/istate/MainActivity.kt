@@ -2,15 +2,19 @@
 package com.rodrigoguerrero.istate
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -39,7 +43,9 @@ class MainActivity : ComponentActivity() {
                     composable("list") {
 
                         Column {
-                            ListTopAppBar()
+                            ListTopAppBar(
+                                onAction = mainViewModel::onClearedAction
+                            )
 
                             UserListScreen(navController = navController, users = users)
                         }
@@ -106,12 +112,30 @@ fun FormTopAppBar() {
 }
 
 @Composable
-fun ListTopAppBar() {
+fun ListTopAppBar(
+    onAction : (ClearAction) -> Unit
+) {
+    val context = LocalContext.current
+
     TopAppBar(
         title = {
             Text(text = "List")
         },
         backgroundColor = MaterialTheme.colors.secondary,
-        contentColor = Color.White
+        contentColor = Color.White,
+        actions = {
+            IconButton(onClick = {
+
+                onAction(ClearAction.OnCleared)
+
+                Toast.makeText(context, "The delete button has been clicked!", Toast.LENGTH_LONG).show()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Delete,
+                    contentDescription = "Delete lists",
+                    tint = Color.White
+                )
+            }
+        }
     )
 }

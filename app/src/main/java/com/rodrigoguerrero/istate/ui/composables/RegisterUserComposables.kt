@@ -119,7 +119,6 @@ fun RegistrationFormScreen(
     }
 }
 
-
 /**
  *  These Composables below are just generic Composables we setup so that we can be able to reuse them across our App.
  */
