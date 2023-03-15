@@ -33,6 +33,7 @@
  */
 package com.rodrigoguerrero.istate.ui.composables
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -47,6 +48,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.rodrigoguerrero.istate.R
 import com.rodrigoguerrero.istate.models.User
 
 @Composable
@@ -56,8 +58,8 @@ fun FabAddUser(navController: NavController) {
         backgroundColor = MaterialTheme.colors.secondary
     ) {
         Icon(
-            Icons.Default.Add,
-            contentDescription = "",
+            imageVector = Icons.Default.Add,
+            contentDescription = "Add a new User",
             tint = Color.White
         )
     }
@@ -72,9 +74,22 @@ fun UserList(users: List<User> = emptyList()) {
             items = users,
             key = { user -> user.email }
         ) { user ->
-            ItemUser(user = user)
-            Divider()
+
+            AllItemUsers(user = user)
         }
+    }
+}
+
+@Composable
+fun AllItemUsers(user : User) {
+    Card(
+        elevation = 4.dp,
+        border = BorderStroke(2.dp, Color.White),
+        modifier = Modifier
+            .padding(4.dp)
+    ) {
+        ItemUser(user = user)
+        Divider()
     }
 }
 

@@ -6,4 +6,5 @@
   <string name="star_wars">Star Wars</string>
   <string name="star_trek">Star Trek</string>
   <string name="email">Enter Email</string>
+  <string name="add_user">Add a new User.</string>
 </resources>
