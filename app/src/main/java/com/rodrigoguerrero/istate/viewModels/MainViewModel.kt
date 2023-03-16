@@ -11,6 +11,8 @@ import com.rodrigoguerrero.istate.models.User
 
 private const val TAG = "MainViewModel"
 
+// Todo - When I come back, I will continue the practicing of Dependency Injection in IntelliJ then come back to this which is "DI Dagger2"
+
 class MainViewModel : ViewModel() {
 
     private val _users = MutableLiveData<List<User>>()

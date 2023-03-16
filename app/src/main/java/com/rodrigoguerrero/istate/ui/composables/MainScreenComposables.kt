@@ -69,6 +69,8 @@ fun FabAddUser(navController: NavController) {
 @Composable
 fun UserList(users: List<User> = emptyList()) {
 
+    // Todo - When I come back, I will fix some other things but I will not to change that Notifications Bar and fix or add some other things.
+
     LazyColumn {
         items(
             items = users,
